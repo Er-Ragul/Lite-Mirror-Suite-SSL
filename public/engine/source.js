@@ -22,9 +22,18 @@ desktopCapturer.getSources({ types: ['window', 'screen'] })
 socket.on('YourId', (myId) => {
     console.log('Received ID from server')
     peer = new Peer('software', {
-        host: '3.23.104.136',
+        host: 'lite-mirror-ssl.herokuapp.com',
         port: 3000,
-	path: '/peerjs'
+	path: '/peerjs',
+	config: {
+            'iceServers': [
+                { url: 'stun:stun1.l.google.com:19302' },
+                {
+                    url: 'turn:numb.viagenie.ca',
+                    credential: 'muazkh',
+                    username: 'webrtc@live.com'
+                }]
+            }
     })
     dataConnection()
     socket.emit('reserve_id', {name: 'software', id: myId})
