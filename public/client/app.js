@@ -27,9 +27,18 @@ const startConnection = () => {
         tokenBox.remove()
         socket.emit('makeCall', token) 
         peer = new Peer(token.toString(), {
-            host: '3.23.104.136',
+            host: 'lite-mirror-ssl.herokuapp.com',
             port: 3000,
-            path: '/peerjs'
+            path: '/peerjs',
+            config: {
+            'iceServers': [
+                { url: 'stun:stun1.l.google.com:19302' },
+                {
+                    url: 'turn:numb.viagenie.ca',
+                    credential: 'muazkh',
+                    username: 'webrtc@live.com'
+                }]
+            }
         })
         receiveShare() 
     }
